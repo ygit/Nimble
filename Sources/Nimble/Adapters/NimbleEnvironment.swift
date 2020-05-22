@@ -1,6 +1,13 @@
 import Dispatch
+
+#if canImport(Foundation)
 import class Foundation.NSObject
 import class Foundation.Thread
+#else
+class NSObject {
+    init() {}
+}
+#endif
 
 /// "Global" state of Nimble is stored here. Only DSL functions should access / be aware of this
 /// class' existence
