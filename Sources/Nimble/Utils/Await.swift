@@ -1,3 +1,5 @@
+#if canImport(Foundation)
+
 import CoreFoundation
 import Dispatch
 import Foundation
@@ -369,3 +371,5 @@ internal func pollBlock(
 
         return result
 }
+
+#endif

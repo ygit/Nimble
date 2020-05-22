@@ -1,4 +1,5 @@
-import Foundation
+#if canImport(Foundation)
+import class Foundation.NSNumber
 
 extension Int8: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
@@ -71,6 +72,7 @@ extension UInt: ExpressibleByBooleanLiteral {
         self = NSNumber(value: value).uintValue
     }
 }
+#endif
 
 internal func rename<T>(_ matcher: Predicate<T>, failureMessage message: ExpectationMessage) -> Predicate<T> {
     return Predicate { actualExpression in

@@ -27,6 +27,7 @@ public protocol TestOutputStringConvertible {
     var testDescription: String { get }
 }
 
+#if canImport(Foundation)
 extension Double: TestOutputStringConvertible {
     public var testDescription: String {
         return NSNumber(value: self).testDescription
@@ -60,6 +61,7 @@ extension NSNumber: TestOutputStringConvertible {
         return description
     }
 }
+#endif
 
 extension Array: TestOutputStringConvertible {
     public var testDescription: String {
@@ -86,6 +88,7 @@ extension AnySequence: TestOutputStringConvertible {
     }
 }
 
+#if canImport(Foundation)
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
         let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
@@ -99,6 +102,7 @@ extension NSIndexSet: TestOutputStringConvertible {
         return "(\(list))"
     }
 }
+#endif
 
 extension String: TestOutputStringConvertible {
     public var testDescription: String {
@@ -106,11 +110,13 @@ extension String: TestOutputStringConvertible {
     }
 }
 
+#if canImport(Foundation)
 extension Data: TestOutputStringConvertible {
     public var testDescription: String {
         return "Data<hash=\((self as NSData).hash),length=\(count)>"
     }
 }
+#endif
 
 ///
 /// Returns a string appropriate for displaying in test output
@@ -150,6 +156,7 @@ public func stringify<T>(_ value: T?) -> String {
 
 // MARK: Collection Type Stringers
 
+#if canImport(Foundation)
 /// Attempts to generate a pretty type string for a given value. If the value is of a Objective-C
 /// collection type, or a subclass thereof, (e.g. `NSArray`, `NSDictionary`, etc.). 
 /// This function will return the type name of the root class of the class cluster for better
@@ -176,6 +183,7 @@ public func prettyCollectionType<T>(_ value: T) -> String {
         return String(describing: value)
     }
 }
+#endif
 
 /// Returns the type name for a given collection type. This overload is used by Swift
 /// collection types.

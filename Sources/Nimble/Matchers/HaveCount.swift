@@ -44,7 +44,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
 }
 
 #if canImport(Darwin)
-import Foundation
+import class Foundation.NSNumber
 
 extension NMBPredicate {
     @objc public class func haveCountMatcher(_ expected: NSNumber) -> NMBPredicate {

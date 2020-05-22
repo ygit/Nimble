@@ -1,5 +1,3 @@
-import Foundation
-
 // swiftlint:disable:next identifier_name
 public let DefaultDelta = 0.0001
 
@@ -36,6 +34,8 @@ public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Doubl
 }
 
 #if canImport(Darwin)
+import class Foundation.NSNumber
+
 public class NMBObjCBeCloseToPredicate: NMBPredicate {
     private let _expected: NSNumber
 
@@ -73,7 +73,7 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
                 return .doesNotMatch
             } else {
                 for (index, actualItem) in actual.enumerated() {
-                    if fabs(actualItem - expectedValues[index]) > delta {
+                    if abs(actualItem - expectedValues[index]) > delta {
                         return .doesNotMatch
                     }
                 }

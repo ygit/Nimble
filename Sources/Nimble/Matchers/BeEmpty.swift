@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
@@ -38,6 +36,11 @@ public func beEmpty() -> Predicate<String> {
     }
 }
 
+#if canImport(Foundation)
+import class Foundation.NSString
+import class Foundation.NSArray
+import class Foundation.NSDictionary
+
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For NSString instances, it is an empty string.
 public func beEmpty() -> Predicate<NSString> {
@@ -67,6 +70,7 @@ public func beEmpty() -> Predicate<NSArray> {
         return PredicateStatus(bool: actual.count == 0)
     }
 }
+#endif
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.

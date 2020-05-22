@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value is an _exact_ instance of the given class.
 public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
     let errorMessage = "be an instance of \(String(describing: expectedType))"
@@ -20,6 +18,9 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
         )
     }
 }
+
+#if canImport(Foundation)
+import class Foundation.NSObject
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAKindOf if you want to match against subclasses
@@ -44,6 +45,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
         )
     }
 }
+#endif
 
 #if canImport(Darwin)
 extension NMBPredicate {

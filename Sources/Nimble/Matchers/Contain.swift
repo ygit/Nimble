@@ -1,5 +1,6 @@
 #if canImport(Foundation)
-import Foundation
+import class Foundation.NSObject
+import class Foundation.NSString
 #endif
 
 /// A Nimble matcher that succeeds when the actual sequence contains the expected values.

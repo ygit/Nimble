@@ -1,5 +1,6 @@
+#if canImport(Foundation)
 import Foundation
-import XCTest
+#endif
 
 /// Default handler for Nimble. This assertion handler passes failures along to
 /// XCTest.
@@ -36,6 +37,8 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
 }
 
 #if !SWIFT_PACKAGE
+import XCTest
+
 /// Helper class providing access to the currently executing XCTestCase instance, if any
 @objc final internal class CurrentTestCaseTracker: NSObject, XCTestObservation {
     @objc static let sharedInstance = CurrentTestCaseTracker()

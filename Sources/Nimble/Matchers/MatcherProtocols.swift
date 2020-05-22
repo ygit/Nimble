@@ -1,4 +1,7 @@
+#if canImport(Foundation)
 import Foundation
+#endif
+
 // `CGFloat` is in Foundation (swift-corelibs-foundation) on Linux.
 #if canImport(Darwin)
     import CoreGraphics
@@ -37,10 +40,12 @@ extension Matcher {
 }
 #endif
 
+#if canImport(Foundation)
 /// Protocol for types that support contain() matcher.
 public protocol NMBContainer {
     func contains(_ anObject: Any) -> Bool
 }
+#endif
 
 #if canImport(Darwin)
 // swiftlint:disable:next todo
@@ -48,6 +53,7 @@ public protocol NMBContainer {
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #endif
 
+#if canImport(Foundation)
 extension NSArray: NMBContainer {}
 extension NSSet: NMBContainer {}
 
@@ -64,13 +70,16 @@ extension NSMapTable: NMBCollection {}
 extension NSSet: NMBCollection {}
 extension NSIndexSet: NMBCollection {}
 extension NSDictionary: NMBCollection {}
+#endif
 
+#if canImport(Foundation)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 public protocol NMBOrderedCollection: NMBCollection {
     func object(at index: Int) -> Any
 }
 
 extension NSArray: NMBOrderedCollection {}
+#endif
 
 public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
@@ -88,6 +97,7 @@ extension Float: NMBDoubleConvertible {
     }
 }
 
+#if canImport(Foundation)
 extension CGFloat: NMBDoubleConvertible {
     public var doubleValue: CDouble {
         return CDouble(self)
@@ -128,6 +138,7 @@ extension NSDate: TestOutputStringConvertible {
         return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
+#endif
 
 #if canImport(Darwin)
 /// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),

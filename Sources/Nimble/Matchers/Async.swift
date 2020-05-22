@@ -1,3 +1,5 @@
+#if canImport(Foundation)
+
 import Foundation
 import Dispatch
 
@@ -187,3 +189,5 @@ extension Expectation {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
+
+#endif

@@ -1,9 +1,18 @@
-import Foundation
+#if canImport(Foundation)
+import class Foundation.NSObject
+import struct Foundation.CharacterSet
+
+public class _FailureMessage: NSObject {}
+#else
+public class _FailureMessage {
+    init() {}
+}
+#endif
 
 /// Encapsulates the failure message that matchers can report to the end user.
 ///
 /// This is shared state between Nimble and matchers that mutate this value.
-public class FailureMessage: NSObject {
+public class FailureMessage: _FailureMessage {
     public var expected: String = "expected"
     public var actualValue: String? = "" // empty string -> use default; nil -> exclude
     public var to: String = "to"
@@ -41,12 +50,17 @@ public class FailureMessage: NSObject {
         _stringValueOverride = stringValue
     }
 
-    internal func stripNewlines(_ str: String) -> String {
+    private func stripNewlines(_ str: String) -> String {
+        #if canImport(Foundation)
         let whitespaces = CharacterSet.whitespacesAndNewlines
         return str
             .components(separatedBy: "\n")
             .map { line in line.trimmingCharacters(in: whitespaces) }
             .joined(separator: "")
+        #else
+        // FIXME
+        return str
+        #endif
     }
 
     internal func computeStringValue() -> String {

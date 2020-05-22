@@ -1,5 +1,3 @@
-import Foundation
-
 // Ideally we would always use `StaticString` as the type for tracking the file name
 // that expectations originate from, for consistency with `assert` etc. from the
 // stdlib, and because recent versions of the XCTest overlay require `StaticString`
@@ -11,7 +9,17 @@ public typealias FileString = StaticString
 public typealias FileString = String
 #endif
 
-public final class SourceLocation: NSObject {
+#if canImport(Foundation)
+import class Foundation.NSObject
+
+public class _SourceLocation: NSObject {}
+#else
+public class _SourceLocation: CustomStringConvertible {
+    init() {}
+}
+#endif
+
+public final class SourceLocation: _SourceLocation {
     public let file: FileString
     public let line: UInt
 

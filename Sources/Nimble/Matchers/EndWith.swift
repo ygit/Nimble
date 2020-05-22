@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
 public func endWith<S: Sequence>(_ endingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
@@ -17,6 +15,9 @@ public func endWith<S: Sequence>(_ endingElement: S.Element) -> Predicate<S> whe
         return PredicateStatus(bool: lastItem == endingElement)
     }
 }
+
+#if canImport(Foundation)
+import class Foundation.NSObject
 
 /// A Nimble matcher that succeeds when the actual collection's last element
 /// is equal to the expected object.
@@ -36,6 +37,7 @@ public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
         return PredicateStatus(bool: collectionValue.isEqual(endingElement))
     }
 }
+#endif
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring
 /// where the expected substring's location is the actual string's length minus the
