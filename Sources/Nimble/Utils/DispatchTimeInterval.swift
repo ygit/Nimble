@@ -1,8 +1,8 @@
 import Dispatch
 
-#if canImport(CDispatch)
-import CDispatch
-#endif
+//#if canImport(CDispatch)
+//import CDispatch
+//#endif
 
 extension DispatchTimeInterval {
     // ** Note: We cannot simply divide the time interval because DispatchTimeInterval associated value type is Int
@@ -28,14 +28,14 @@ extension DispatchTimeInterval {
     }
 }
 
-#if canImport(Foundation)
-import typealias Foundation.TimeInterval
-
-extension TimeInterval {
-    var dispatchInterval: DispatchTimeInterval {
-        let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
-        // perhaps use nanoseconds, though would more often be > Int.max
-        return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
-    }
-}
-#endif
+//#if canImport(Foundation)
+//import typealias Foundation.TimeInterval
+//
+//extension TimeInterval {
+//    var dispatchInterval: DispatchTimeInterval {
+//        let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
+//        // perhaps use nanoseconds, though would more often be > Int.max
+//        return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
+//    }
+//}
+//#endif
